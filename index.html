@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jomari</title>
+    <style>
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("jom.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Color overlay animation */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,0,150,0.3), rgba(255,150,0,0.3));
+            animation: overlayMove 6s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes overlayMove {
+            0% { opacity: .3; }
+            50% { opacity: .5; }
+            100% { opacity: .3; }
+        }
+
+        h1 {
+            position: relative;
+            z-index: 2;
+            font-size: 4rem;
+            color: white;
+            text-align: center;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff;
+            animation: pop 4s infinite ease-in-out, fadeIn 3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.8) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(-5deg); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .bubble {
+            position: absolute;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: .9; }
+            100% { transform: translateY(-200px); opacity: 0; }
+        }
+
+        /* Music button style */
+        .music-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff6ec7;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .music-button:hover {
+            background-color: #ff9a8b;
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        /* Add play/pause icon */
+        .music-button i {
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Happy Birthday Jomari Ponce!</h1>
+
+    <!-- Floating bubbles -->
+    <div class="bubble" style="top:80%; left:20%; animation-duration:5s;"></div>
+    <div class="bubble" style="top:85%; left:50%; animation-duration:7s;"></div>
+    <div class="bubble" style="top:90%; left:70%; animation-duration:4s;"></div>
+    <div class="bubble" style="top:88%; left:30%; animation-duration:6s;"></div>
+
+    <!-- Music Player -->
+    <audio id="birthday-audio" preload="auto">
+        <!-- Replace the link with your own mp3 file or use the example URL -->
+        <source src="bdaysong.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Button -->
+    <button class="music-button" id="music-btn">
+        <i id="music-icon" class="fas fa-play"></i> Play Music
+    </button>
+
+    <script>
+        // Get the button and audio element
+        const musicBtn = document.getElementById("music-btn");
+        const audio = document.getElementById("birthday-audio");
+        const musicIcon = document.getElementById("music-icon");
+
+        // Toggle play/pause
+        musicBtn.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play();
+                musicIcon.classList.remove("fa-play");
+                musicIcon.classList.add("fa-pause");
+                musicBtn.textContent = " Pause Music";
+            } else {
+                audio.pause();
+                musicIcon.classList.remove("fa-pause");
+                musicIcon.classList.add("fa-play");
+                musicBtn.textContent = " Play Music";
+            }
+        });
+    </script>
+
+    <!-- FontAwesome (for play/pause icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</body>
+</html>
